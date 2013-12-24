@@ -1,11 +1,10 @@
 <?xml version = '1.0' encoding = 'UTF-8' ?>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Mon Dec 23 22:27:39 CST 2013'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Tue Dec 24 20:15:57 CST 2013'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.34(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
     </XMI.documentation>
     <XMI.metamodel xmi.name="UML" xmi.version="1.4"/></XMI.header>
-    
   <XMI.content>
     <UML:Model xmi.id = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000961'
       name = 'CPMISS' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
@@ -23,7 +22,7 @@
                     <UML:Transition xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:000000000000096D'/>
                   </UML:StateVertex.outgoing>
                   <UML:StateVertex.incoming>
-                    <UML:Transition xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000966'/>
+                    <UML:Transition xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:000000000000097A'/>
                   </UML:StateVertex.incoming>
                   <UML:CompositeState.subvertex>
                     <UML:SimpleState xmi.id = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000968'
@@ -31,6 +30,9 @@
                       <UML:StateVertex.outgoing>
                         <UML:Transition xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:000000000000096A'/>
                       </UML:StateVertex.outgoing>
+                      <UML:StateVertex.incoming>
+                        <UML:Transition xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:000000000000097D'/>
+                      </UML:StateVertex.incoming>
                     </UML:SimpleState>
                     <UML:SimpleState xmi.id = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000969'
                       name = 'state02' isSpecification = 'false'>
@@ -38,14 +40,14 @@
                         <UML:Transition xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:000000000000096A'/>
                       </UML:StateVertex.incoming>
                     </UML:SimpleState>
+                    <UML:Pseudostate xmi.id = '111--70-113-77--5c58af58:1431fb405ae:-8000:000000000000097B'
+                      name = 'compStateInit' isSpecification = 'false' kind = 'initial'>
+                      <UML:StateVertex.outgoing>
+                        <UML:Transition xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:000000000000097D'/>
+                      </UML:StateVertex.outgoing>
+                    </UML:Pseudostate>
                   </UML:CompositeState.subvertex>
                 </UML:CompositeState>
-                <UML:SimpleState xmi.id = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000964'
-                  name = 'state0' isSpecification = 'false'>
-                  <UML:StateVertex.outgoing>
-                    <UML:Transition xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000966'/>
-                  </UML:StateVertex.outgoing>
-                </UML:SimpleState>
                 <UML:SimpleState xmi.id = '111--70-113-77--5c58af58:1431fb405ae:-8000:000000000000096C'
                   name = 'state2' isSpecification = 'false'>
                   <UML:StateVertex.outgoing>
@@ -59,6 +61,9 @@
                 </UML:SimpleState>
                 <UML:SimpleState xmi.id = '111--70-113-77--5c58af58:1431fb405ae:-8000:000000000000096E'
                   name = 'state4' isSpecification = 'false'>
+                  <UML:StateVertex.outgoing>
+                    <UML:Transition xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000980'/>
+                  </UML:StateVertex.outgoing>
                   <UML:StateVertex.incoming>
                     <UML:Transition xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:000000000000096F'/>
                   </UML:StateVertex.incoming>
@@ -70,25 +75,28 @@
                   </UML:StateVertex.outgoing>
                   <UML:StateVertex.incoming>
                     <UML:Transition xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000971'/>
+                    <UML:Transition xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000980'/>
+                  </UML:StateVertex.incoming>
+                </UML:SimpleState>
+                <UML:Pseudostate xmi.id = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000977'
+                  name = 'init' isSpecification = 'false' kind = 'initial'>
+                  <UML:StateVertex.outgoing>
+                    <UML:Transition xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000979'/>
+                  </UML:StateVertex.outgoing>
+                </UML:Pseudostate>
+                <UML:SimpleState xmi.id = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000978'
+                  name = 'state0' isSpecification = 'false'>
+                  <UML:StateVertex.outgoing>
+                    <UML:Transition xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:000000000000097A'/>
+                  </UML:StateVertex.outgoing>
+                  <UML:StateVertex.incoming>
+                    <UML:Transition xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000979'/>
                   </UML:StateVertex.incoming>
                 </UML:SimpleState>
               </UML:CompositeState.subvertex>
             </UML:CompositeState>
           </UML:StateMachine.top>
-          
           <UML:StateMachine.transitions>
-            <UML:Transition xmi.id = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000966'
-              isSpecification = 'false'>
-              <UML:Transition.trigger>
-                <UML:SignalEvent xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000967'/>
-              </UML:Transition.trigger>
-              <UML:Transition.source>
-                <UML:SimpleState xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000964'/>
-              </UML:Transition.source>
-              <UML:Transition.target>
-                <UML:CompositeState xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000965'/>
-              </UML:Transition.target>
-            </UML:Transition>
             <UML:Transition xmi.id = '111--70-113-77--5c58af58:1431fb405ae:-8000:000000000000096A'
               isSpecification = 'false'>
               <UML:Transition.trigger>
@@ -149,9 +157,56 @@
                 <UML:SimpleState xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:000000000000096C'/>
               </UML:Transition.target>
             </UML:Transition>
+            <UML:Transition xmi.id = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000979'
+              isSpecification = 'false'>
+              <UML:Transition.trigger>
+                <UML:SignalEvent xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:000000000000097E'/>
+              </UML:Transition.trigger>
+              <UML:Transition.source>
+                <UML:Pseudostate xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000977'/>
+              </UML:Transition.source>
+              <UML:Transition.target>
+                <UML:SimpleState xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000978'/>
+              </UML:Transition.target>
+            </UML:Transition>
+            <UML:Transition xmi.id = '111--70-113-77--5c58af58:1431fb405ae:-8000:000000000000097A'
+              isSpecification = 'false'>
+              <UML:Transition.trigger>
+                <UML:SignalEvent xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000967'/>
+              </UML:Transition.trigger>
+              <UML:Transition.source>
+                <UML:SimpleState xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000978'/>
+              </UML:Transition.source>
+              <UML:Transition.target>
+                <UML:CompositeState xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000965'/>
+              </UML:Transition.target>
+            </UML:Transition>
+            <UML:Transition xmi.id = '111--70-113-77--5c58af58:1431fb405ae:-8000:000000000000097D'
+              isSpecification = 'false'>
+              <UML:Transition.trigger>
+                <UML:SignalEvent xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:000000000000097F'/>
+              </UML:Transition.trigger>
+              <UML:Transition.source>
+                <UML:Pseudostate xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:000000000000097B'/>
+              </UML:Transition.source>
+              <UML:Transition.target>
+                <UML:SimpleState xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000968'/>
+              </UML:Transition.target>
+            </UML:Transition>
+            <UML:Transition xmi.id = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000980'
+              isSpecification = 'false'>
+              <UML:Transition.trigger>
+                <UML:SignalEvent xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000976'/>
+              </UML:Transition.trigger>
+              <UML:Transition.source>
+                <UML:SimpleState xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:000000000000096E'/>
+              </UML:Transition.source>
+              <UML:Transition.target>
+                <UML:SimpleState xmi.idref = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000970'/>
+              </UML:Transition.target>
+            </UML:Transition>
           </UML:StateMachine.transitions>
         </UML:StateMachine>
-        
         <UML:SignalEvent xmi.id = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000967'
           name = 'trans0' isSpecification = 'false'/>
         <UML:SignalEvent xmi.id = '111--70-113-77--5c58af58:1431fb405ae:-8000:000000000000096B'
@@ -159,11 +214,15 @@
         <UML:SignalEvent xmi.id = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000973'
           name = 'trans1' isSpecification = 'false'/>
         <UML:SignalEvent xmi.id = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000974'
-          name = 'tarns4' isSpecification = 'false'/>
+          name = 'trans4' isSpecification = 'false'/>
         <UML:SignalEvent xmi.id = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000975'
           name = 'trans2' isSpecification = 'false'/>
         <UML:SignalEvent xmi.id = '111--70-113-77--5c58af58:1431fb405ae:-8000:0000000000000976'
           name = 'trans3' isSpecification = 'false'/>
+        <UML:SignalEvent xmi.id = '111--70-113-77--5c58af58:1431fb405ae:-8000:000000000000097E'
+          name = 'trans' isSpecification = 'false'/>
+        <UML:SignalEvent xmi.id = '111--70-113-77--5c58af58:1431fb405ae:-8000:000000000000097F'
+          name = 't' isSpecification = 'false'/>
       </UML:Namespace.ownedElement>
     </UML:Model>
   </XMI.content>

@@ -26,46 +26,30 @@ public class Trigger {
         this.name = name;
     }
     
-    
     public String getName() {
         return name;
     }
-
-
     public void setName(String name) {
         this.name = name;
     }
-
-
     public Set<State> getSources() {
         return sources;
     }
-
-
     public void setSources(Set<State> sources) {
         this.sources = sources;
     }
-
-
     public Set<State> getTargets() {
         return targets;
     }
-
-
     public void setTargets(Set<State> targets) {
         this.targets = targets;
     }
-
-
     public Set<Transition> getTransitions() {
         return transitions;
     }
-
-
     public void setTransitions(Set<Transition> transitions) {
         this.transitions = transitions;
     }
-
 
     @Override
     public boolean equals(Object obj) {
