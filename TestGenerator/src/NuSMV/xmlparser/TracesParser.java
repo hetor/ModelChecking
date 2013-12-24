@@ -30,7 +30,7 @@ public class TracesParser {
         try {  
             doc = reader.read(in);
         } catch (DocumentException e) {  
-            e.printStackTrace();  
+            e.printStackTrace();
         } 
     }
 

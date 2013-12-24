@@ -7,7 +7,10 @@ import java.util.Set;
  * @author hetao
  */
 public class Trigger {
-
+    
+    /**在状态图中的id**/
+    private String id;
+    
     /**trigger名称**/
     private String name;
     
@@ -26,6 +29,15 @@ public class Trigger {
         this.name = name;
     }
     
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
