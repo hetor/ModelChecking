@@ -6,6 +6,9 @@ package StateChart.entity;
  */
 public class Transition {
     
+    /**在状态图中的id**/
+    private String id;
+    
     /**源状态**/
     private State source;
     
@@ -16,42 +19,67 @@ public class Transition {
     private Trigger trigger;
     
     
+    public String getId() {
+        return id;
+    }
+    
+    public void setId(String id) {
+        this.id = id;
+    }
+    
     public State getSource() {
         return source;
     }
+
     public void setSource(State source) {
         this.source = source;
     }
+
     public State getTarget() {
         return target;
     }
+
     public void setTarget(State target) {
         this.target = target;
     }
+
     public Trigger getTrigger() {
         return trigger;
     }
+
     public void setTrigger(Trigger trigger) {
         this.trigger = trigger;
     }
-    
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Transition)){
+        if (this == obj)
+            return true;
+        if (obj == null)
             return false;
-        }
-        Transition t = (Transition) obj;
-       if(source.getName().equals(t.source.getName())
-              && target.getName().equals(t.getTarget().getName())
-              && trigger.getName().equals(t.getTrigger().getName())) {
-           return true;
-       }
-       
-       return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Transition other = (Transition) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
     }
     
     @Override
-    public int hashCode() {
-        return trigger.getName().hashCode();
+    public String toString() {
+        StringBuilder trans = new StringBuilder();
+        trans.append("<").append(source.getName()).append(", ").append(trigger.getName()).append(", ").append(target.getName()).append(">");
+        return trans.toString();
     }
 }
