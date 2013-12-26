@@ -54,11 +54,4 @@ public class PropertyParser {
         
         return properties; 
     }
-    
-    public static void main(String[] args) {
-        List<Property> properties = parser();
-        for(Property property: properties) {
-            System.out.println(property.toString());
-        }
-    }
 }

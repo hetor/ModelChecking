@@ -11,8 +11,10 @@ public enum StateChartExceptionCode {
 	EMPTY_CONTAINER,
 	INVALID_KEY,
 	
+	//xmi parse error
+	XMI_PARSE_ERROR,
 	
-	//xml format
+	//xmi format
 	NO_INIT_STATE,
 	MULTI_INIT_STATE,
 	NO_TRANSITION_INIT_STATE,

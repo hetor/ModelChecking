@@ -67,11 +67,4 @@ public class TracesParser {
         
         return traces;
     }
-    
-    public static void main(String[] args) {
-        List<Trace> traces = parser();
-        for (Trace trace : traces) {
-            System.out.println(trace);
-        }
-    }
 }

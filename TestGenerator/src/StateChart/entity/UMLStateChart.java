@@ -11,6 +11,9 @@ public class UMLStateChart {
     /**UML工程中的name**/
     private String name;
     
+    /**UML工程的初始状态**/
+    private State initState;
+    
     /**包含的所有状态<stateId, State>**/
     private Map<String, State> states;
     
@@ -58,6 +61,14 @@ public class UMLStateChart {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public State getInitState() {
+        return initState;
+    }
+
+    public void setInitState(State initState) {
+        this.initState = initState;
     }
 
     public Map<String, State> getStates() {
@@ -115,7 +126,7 @@ public class UMLStateChart {
         
         StringBuilder result = new StringBuilder();
         
-        result.append("STATECHART: \nname: ").append(name).append("\n");
+        result.append("STATECHART: \nname:").append(name).append(", initState:").append(initState.getName()).append("\n");
         
         //states
         result.append("\nSTATE: \n");

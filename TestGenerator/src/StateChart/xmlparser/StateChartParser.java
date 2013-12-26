@@ -35,7 +35,7 @@ public class StateChartParser {
         } 
     }
 
-    public static UMLStateChart parser() throws Exception{
+    public static UMLStateChart parser(){
         Element usm = (Element) doc.selectSingleNode("//UML:StateMachine");
         if(null == usm) {
             return null;
@@ -52,7 +52,7 @@ public class StateChartParser {
     }
     
     @SuppressWarnings("unchecked")
-    private static Map<String, Transition> parseTransitions(UMLStateChart usc) throws Exception{
+    private static Map<String, Transition> parseTransitions(UMLStateChart usc){
         List<Node> transitionNodes = doc.selectNodes("//UML:Transition[@xmi.id]");
         Map<String, Transition> trans = new HashMap<>();
         for(Node node : transitionNodes) {
@@ -184,14 +184,5 @@ public class StateChartParser {
     private static boolean isTransitionValid(Element el) {
         Node triggerRefNode = el.selectSingleNode("UML:Transition.trigger/UML:SignalEvent");
         return null != triggerRefNode;
-    }
-    
-    public static void main(String[] args) {
-        try {
-            UMLStateChart umlStateChart = parser();
-            System.out.println(umlStateChart);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
