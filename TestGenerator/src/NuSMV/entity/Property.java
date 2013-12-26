@@ -1,7 +1,5 @@
 package NuSMV.entity;
 
-import NuSMV.enums.PropertyType;
-
 import com.google.gson.Gson;
 
 public class Property {

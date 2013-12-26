@@ -1,4 +1,4 @@
-package NuSMV.enums;
+package NuSMV.entity;
 
 public enum PropertyType {
 

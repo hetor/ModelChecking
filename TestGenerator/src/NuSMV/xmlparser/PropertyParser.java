@@ -9,7 +9,7 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import NuSMV.entity.Property;
-import NuSMV.enums.PropertyType;
+import NuSMV.entity.PropertyType;
 
 
 /**
