@@ -20,11 +20,8 @@ public class UMLStateChart {
     /**包含的所有触发<triggerId, Trigger>**/
     private Map<String, Trigger> triggers;
     
-//    //constructor
-//    public UMLStateChart(String id) {
-//        this.id = id;
-//    }
     
+    /**added method**/
     public State getStateById(String id) {
         if(null==states || states.size()==0) {
             return null;
@@ -46,7 +43,7 @@ public class UMLStateChart {
         return triggers.get(id);
     }
     
-
+    /**getter, setter**/
     public String getId() {
         return id;
     }
@@ -87,6 +84,7 @@ public class UMLStateChart {
         this.triggers = triggers;
     }
 
+    /**override method**/
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -114,27 +112,36 @@ public class UMLStateChart {
     
     @Override
     public String toString() {
+        
         StringBuilder result = new StringBuilder();
+        
         result.append("STATECHART: \nname: ").append(name).append("\n");
+        
         //states
         result.append("\nSTATE: \n");
-        Collection<State> statesValues = states.values();
-        for (State state : statesValues) {
-            result.append(state).append("\n");
+        if(null != states) {
+            Collection<State> statesValues = states.values();
+            for (State state : statesValues) {
+                result.append(state).append("\n");
+            }
         }
         
         //triggers
         result.append("\nTRIGGER: \n");
-        Collection<Trigger> triggersValues = triggers.values();
-        for (Trigger trigger : triggersValues) {
-            result.append(trigger).append("\n");
+        if(null != triggers) {
+            Collection<Trigger> triggersValues = triggers.values();
+            for (Trigger trigger : triggersValues) {
+                result.append(trigger).append("\n");
+            }
         }
         
         //transitions
         result.append("\nTRANSITION： \n");
-        Collection<Transition> transValues = transitions.values();
-        for (Transition t : transValues) {
-            result.append(t).append("\n");
+        if(null != transitions) {
+            Collection<Transition> transValues = transitions.values();
+            for (Transition t : transValues) {
+                result.append(t).append("\n");
+            }
         }
         
         return result.toString();

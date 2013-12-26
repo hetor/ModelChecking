@@ -78,8 +78,25 @@ public class Transition {
     
     @Override
     public String toString() {
+        
         StringBuilder trans = new StringBuilder();
-        trans.append("<").append(source.getName()).append(", ").append(trigger.getName()).append(", ").append(target.getName()).append(">");
+        
+        trans.append("<");
+        
+        if(null != source) {
+            trans.append(source.getName()).append(", ");
+        }
+        
+        if(null != trigger) {
+            trans.append(trigger.getName()).append(", ");
+        }
+        
+        if(null != target) {
+            trans.append(target.getName());
+        }
+        
+        trans.append(">");
+        
         return trans.toString();
     }
 }

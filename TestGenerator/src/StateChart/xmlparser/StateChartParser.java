@@ -24,7 +24,7 @@ public class StateChartParser {
     static {
         SAXReader reader = new SAXReader();  
         InputStream in = StateChartParser.class.getClassLoader().
-                getResourceAsStream("statechart.xmi");
+                getResourceAsStream("statechart2.xmi");
         //FIXME
         try {  
             doc = reader.read(in);
@@ -71,6 +71,7 @@ public class StateChartParser {
             t.setSource(source);
             t.setTarget(target);
             
+            trigger.addTransition(t);
             source.addOutgoing(t);
             target.addIncomings(t);
             trans.put(id, t);
@@ -105,6 +106,7 @@ public class StateChartParser {
             Trigger trigger = new Trigger();
             trigger.setId(id);
             trigger.setName(el.attributeValue("name"));
+            trigger.setTransitions(new HashSet<Transition>()); //empty
             triggers.put(id, trigger);
         }
         return triggers;

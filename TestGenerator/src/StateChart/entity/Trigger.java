@@ -1,5 +1,8 @@
 package StateChart.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * UML状态图的触发
  * @author hetao
@@ -11,20 +14,45 @@ public class Trigger {
     
     /**trigger名称**/
     private String name;
-//    
+    
+    /**包含trigger的迁移集**/
+    private Set<Transition> trans;
+    
 //    /**trigger的source集**/
-//    @Deprecated
 //    private Set<State> sources;
 //    
 //    /**trigger的target集**/
-//    @Deprecated
 //    private Set<State> targets;
-//    
-//    /**包含trigger的迁移集**/
-//    @Deprecated
-//    private Set<Transition> transitions;
     
     
+    /********added method**/
+    public void addTransition(Transition t) {
+        trans.add(t);
+    }
+    
+    public Set<State> getSources() { //不用缓存
+        if(null == trans) {
+            return null;
+        }
+        Set<State> states = new HashSet<>();
+        for (Transition t : trans) {
+            states.add(t.getSource());
+        }
+        return states;
+    }
+    
+    public Set<State> getTargets() { //不用缓存
+        if(null == trans) {
+            return null;
+        }
+        Set<State> states = new HashSet<>();
+        for (Transition t : trans) {
+            states.add(t.getTarget());
+        }
+        return states;
+    }
+    
+    /**********getter, setter**/
     public String getId() {
         return id;
     }
@@ -36,29 +64,20 @@ public class Trigger {
     public String getName() {
         return name;
     }
+    
     public void setName(String name) {
         this.name = name;
     }
-//    public Set<State> getSources() {
-//        return sources;
-//    }
-//    public void setSources(Set<State> sources) {
-//        this.sources = sources;
-//    }
-//    public Set<State> getTargets() {
-//        return targets;
-//    }
-//    public void setTargets(Set<State> targets) {
-//        this.targets = targets;
-//    }
-//    public Set<Transition> getTransitions() {
-//        return transitions;
-//    }
-//    public void setTransitions(Set<Transition> transitions) {
-//        this.transitions = transitions;
-//    }
+    
+    public Set<Transition> getTransitions() {
+        return trans;
+    }
 
+    public void setTransitions(Set<Transition> transitions) {
+        this.trans = transitions;
+    }
 
+    /*************override method**/
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -87,8 +106,32 @@ public class Trigger {
     
     @Override
     public String toString() {
-        StringBuilder result = new StringBuilder();
-        result.append("(name:").append(name).append(")");
-        return result.toString();
+        StringBuilder trigger = new StringBuilder();
+        trigger.append("(name:").append(name).append(", sources:{");
+        
+        Set<State> sources = getSources();
+        if(null != sources) {
+            for (State state : sources) {
+                trigger.append(state.getName()).append(",");
+            }
+        }
+
+        trigger.append("}, targets:{");
+        Set<State> targets = getTargets();
+        if(null != targets) {
+            for (State state : targets) {
+                trigger.append(state.getName()).append(",");
+            }
+        }
+        
+        trigger.append("}, transitions:{");
+        if(null != trans) {
+            for (Transition t : trans) {
+                trigger.append(t).append(",");
+            }
+        }
+        
+        trigger.append("})");
+        return trigger.toString();
     }
  }
