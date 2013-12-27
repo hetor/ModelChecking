@@ -99,6 +99,9 @@ public class State {
         return ts;
     }
     
+    /**
+     * make sure the state is valid to use
+     */
     public boolean isStateValid() {
         return StringUtils.isNotBlank(id)
                 && StringUtils.isNotBlank(name)
