@@ -3,6 +3,8 @@ package StateChart.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * UML×´Ì¬Í¼µÄ´¥·¢
  * @author hetao
@@ -50,6 +52,13 @@ public class Trigger {
             states.add(t.getTarget());
         }
         return states;
+    }
+    
+    public boolean isTriggerValid() {
+        return StringUtils.isNotBlank(id)
+                && StringUtils.isNotBlank(name)
+                && null != trans
+                && trans.size() > 0;
     }
     
     /**********getter, setter**/

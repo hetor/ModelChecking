@@ -1,5 +1,7 @@
 package StateChart.entity;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * UML×´Ì¬Í¼µÄÇ¨ÒÆ
  * @author hetao
@@ -17,6 +19,13 @@ public class Transition {
     
     /**´¥·¢**/
     private Trigger trigger;
+    
+    public boolean isTransitionValid() {
+        return StringUtils.isNotBlank(id)
+                && null != source
+                && null != target
+                && null != trigger;
+    }
     
     
     public String getId() {

@@ -2,77 +2,39 @@ package StateChart.exception;
 
 public enum StateChartExceptionCode {
 
-	NA,
-	NULL_POINTER,
-	NOT_NULL,
-	BLANK_STRING,
-	BLANK_NAME,
-	ILLEGAL_VALUE,
-	EMPTY_CONTAINER,
-	INVALID_KEY,
+	NA(""),
+	NULL_POINTER("空指针"),
+	NOT_NULL(""),
+	BLANK_STRING(""),
+	BLANK_NAME(""),
+	ILLEGAL_VALUE(""),
+	EMPTY_CONTAINER(""),
+	INVALID_KEY(""),
+	
+	//umlstatechart
+	UMLSTATECHART_INVALID("状态图对象不可用（缺少数据）"),
+	STATE_INVALID("状态对象不可用（缺少数据）"),
 	
 	//xmi parse error
-	XMI_PARSE_ERROR,
+	XMI_PARSE_ERROR(""),
 	
 	//xmi format
-	NO_INIT_STATE,
-	MULTI_INIT_STATE,
-	NO_TRANSITION_INIT_STATE,
-	MULTI_TRANSITION_INIT_STATE,
-	XMI_FORMAT_ERROR,
+	NO_INIT_STATE(""),
+	MULTI_INIT_STATE(""),
+	NO_TRANSITION_INIT_STATE(""),
+	MULTI_TRANSITION_INIT_STATE(""),
+	XMI_FORMAT_ERROR(""),
 	
 	//method param
-	METHOD_PARAM_ERROR,
+	METHOD_PARAM_ERROR("");
 	
-	// user login
-	USERNAME_ERROR,
-	PASSWORD_ERROR,
-	USER_FORBIDDEN,
-	USER_DELETED,
-	USER_OUTDATED,
-	PLATFORM_NOT_MATCH,
-
-	// operator user
-	EMPLOYEE_CODE_DUPLICATED,
-
-	// token authorize
-	TOKEN_MATCH_FAILED,
-	TOKEN_OUTDATED,
-	TOKEN_INVALID,
-	TOKEN_DESERIALIZE_FAILED,
-
-	// duplicated
-	NAME_DUPLICATED,
-	USERNAME_DUPLICATED,
-	CUSTOMER_FULLNAME_DUPLICATED,
-	CUSTOMER_SHORTNAME_DUPLICATED,
-	EMAIL_DUPLICATED,
-	OFFICENO_DUPLICATED,
-	OFFICENO_NULL,
-	AIRLINE_NULL,
-	BUSINESS_MAIL_DUPLICATED,
-	USER_EMAIL_DUPLICATED,
-
-	// file upload
-	FILE_UPLOAD_FAILED,
-
-	// department
-	DEPARTMENT_NOT_EMPTY,
-
-	// customer group
-	CUSTOMER_GROUP_NOT_EMPTY,
-
-	// finance info create error
-	FINANCE_CREATE_ERROR,
-
-	MAIL_NOT_FOUND,
-
-	// customer
-	BLANK_CUSTOMER_FULLNAME,
-	BLANK_CUSTOMER_SHORTNAME,
-	DUPLICATED_BIG_CUSTOMER_NO,
-
-	// security code
-	SECURITY_CODE_OUTDATED,
-
+	private String mess;
+	
+	private StateChartExceptionCode(String mess) {
+	    this.mess = mess;
+	}
+	
+	public String getMess() {
+	    return mess;
+	}
 }

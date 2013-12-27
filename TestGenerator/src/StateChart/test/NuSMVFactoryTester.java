@@ -9,8 +9,8 @@ public class NuSMVFactoryTester {
 
     @Test
     public void testCreateNuSMV() {
-        NuSMVFactory factory = new NuSMVFactory();
-        System.out.println(factory.createNuSMV(StateChartParser.parser()));
+        NuSMVFactory factory = new NuSMVFactory(StateChartParser.parser());
+        System.out.println(factory.createNuSMV());
     }
 
     @Test

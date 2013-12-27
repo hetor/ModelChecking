@@ -10,7 +10,7 @@ public class StateChartException extends RuntimeException {
     private Map<String, String> extra;
 
     public StateChartException(StateChartExceptionCode errorCode) {
-        this(errorCode, "", null);
+        this(errorCode, errorCode.getMess(), null); //change mess param by hetao
     }
 
     public StateChartException(StateChartExceptionCode errorCode, String message) {

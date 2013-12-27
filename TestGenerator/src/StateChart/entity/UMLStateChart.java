@@ -3,6 +3,8 @@ package StateChart.entity;
 import java.util.Collection;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class UMLStateChart {
 
     /**UML工程中的唯一id**/
@@ -44,6 +46,15 @@ public class UMLStateChart {
             return null;
         }
         return triggers.get(id);
+    }
+    
+    public boolean isUMLStateChartValid() {
+        return StringUtils.isNotBlank(id)
+                && StringUtils.isNotBlank(name) 
+                && null != initState 
+                && null != states && states.size() > 0 
+                && null != transitions && transitions.size() > 0
+                && null != triggers && triggers.size() > 0;
     }
     
     /**getter, setter**/

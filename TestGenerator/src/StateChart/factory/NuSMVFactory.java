@@ -1,6 +1,8 @@
 package StateChart.factory;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import StateChart.entity.State;
@@ -8,24 +10,37 @@ import StateChart.entity.Trigger;
 import StateChart.entity.UMLStateChart;
 import StateChart.exception.StateChartException;
 import StateChart.exception.StateChartExceptionCode;
+import StateChart.utils.StringBuilderUtil;
 
 public class NuSMVFactory {
     
-    public String createNuSMV(UMLStateChart usc) {
+    private UMLStateChart usc;
+    private Map<String, String> statesNuSMV;
+    
+    public NuSMVFactory(UMLStateChart usc) {
         if(null == usc) {
-            return null;
+            throw new StateChartException(StateChartExceptionCode.NULL_POINTER, "状态图对象不能为空");
         }
+        if(!usc.isUMLStateChartValid()) {
+            throw new StateChartException(StateChartExceptionCode.UMLSTATECHART_INVALID);
+        }
+        this.usc = usc;
         Collection<State> states = usc.getStates().values();
-        if(null == states || states.size() == 0) {
-            throw new StateChartException(StateChartExceptionCode.XMI_PARSE_ERROR, "没有状态");
+        statesNuSMV = new HashMap<>();
+        int i=0;
+        for (State s : states) {
+            statesNuSMV.put(s.getName(), "s"+i++);
         }
+    }
+    
+    public String createNuSMV() {
+        
+        Collection<State> states = usc.getStates().values();
         Collection<Trigger> triggers = usc.getTriggers().values();
-        if(null == triggers || triggers.size() == 0) {
-            throw new StateChartException(StateChartExceptionCode.XMI_PARSE_ERROR, "没有事件");
-        }
         State initState = usc.getInitState();
-        if(null == initState ) {
-            throw new StateChartException(StateChartExceptionCode.XMI_PARSE_ERROR, "无初始状态"); 
+        
+        if(!initState.isStateValid()) {
+            throw new StateChartException(StateChartExceptionCode.STATE_INVALID);
         }
         
         return constructHEAD() + constructVAR(states, triggers) + constructASSIGN(states, triggers, initState);
@@ -48,7 +63,7 @@ public class NuSMVFactory {
         for (State s : states) {
             sb.append(s.getName()).append(",");
         }
-        deleteLastChar(sb);
+        StringBuilderUtil.deleteLastChar(sb);
         sb.append("};\n");
         
         //other vars(triggers)
@@ -62,10 +77,6 @@ public class NuSMVFactory {
     
     private String constructASSIGN(Collection<State> states,  Collection<Trigger> triggers, State initState) {
         Set<Trigger> initTriggers = initState.getTriggers();
-        if(null == initTriggers || initTriggers.size() == 0) {
-            throw new StateChartException(StateChartExceptionCode.XMI_PARSE_ERROR, "初始状态无包含的事件");
-        }
-            
         StringBuilder sb = new StringBuilder();
         sb.append("ASSIGN\n");
         
@@ -90,7 +101,7 @@ public class NuSMVFactory {
                 for (State s : nextStates) {
                     sb.append(s.getName()).append(",");
                 }
-                deleteLastChar(sb);
+                StringBuilderUtil.deleteLastChar(sb);
                 sb.append("};\n");
             }
         }
@@ -103,15 +114,11 @@ public class NuSMVFactory {
                 for (State s : sources) {
                     sb.append("next(state)=").append(s.getName()).append("|");
                 }
-                deleteLastChar(sb);
+                StringBuilderUtil.deleteLastChar(sb);
                 sb.append(": TRUE;\n    TRUE: FALSE;\nesac;\n\n");
             }
         }
         
         return sb.toString();
     }
-    
-    private void deleteLastChar(StringBuilder sb) {
-        sb.deleteCharAt(sb.length()-1);
-    } 
 }

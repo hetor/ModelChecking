@@ -3,6 +3,8 @@ package StateChart.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * UML状态图的状态
  * @author hetao
@@ -20,7 +22,8 @@ public class State {
     
     /**outgoing迁移集**/
     private Set<Transition> outgoings;
-//    
+    
+//     需要缓存时使用  
 //    /**状态的prev状态集**/
 //    private Set<State> prevStates;
 //    
@@ -31,47 +34,76 @@ public class State {
 //    private Set<Trigger> triggers;
     
     
-    
     /***************added method**/
+    /**
+     * add t no matter state is or not valid
+     */
     public void addIncomings(Transition t) {
+        if(null == t) return;
+        if(null == incomings) {
+            incomings = new HashSet<>();
+        }
         incomings.add(t);
     }
     
+    /**
+     * add t no matter state is or not valid
+     */
     public void addOutgoing(Transition t) {
+        if(null == t) return;
+        if(null == outgoings) {
+            outgoings = new HashSet<>();
+        }
         outgoings.add(t);
     }
     
-    public Set<State> getPrevStates() { //不用缓存
-        if(null == incomings) {
-            return null;
-        }
+    /**
+     * 不用缓存
+     * @return if this state is valid or no outgoings then return empty set
+     */
+    public Set<State> getPrevStates() {
         Set<State> states = new HashSet<>();
-        for (Transition t : incomings) {
-            states.add(t.getSource());
+        if(isStateValid()) {
+            for (Transition t : incomings) {
+                states.add(t.getSource());
+            }
         }
         return states;
     }
     
-    public Set<State> getNextStates() { //不用缓存
-        if(null == outgoings) {
-            return null;
-        }
+    /**
+     * 不用缓存
+     * @return if this state is valid or no outgoings then return empty set
+     */
+    public Set<State> getNextStates() {
         Set<State> states = new HashSet<>();
-        for (Transition t : outgoings) {
-            states.add(t.getTarget());
+        if(isStateValid()) {
+            for (Transition t : outgoings) {
+                states.add(t.getTarget());
+            }
         }
         return states;
     }
     
-    public Set<Trigger> getTriggers() { //不用缓存
-        if(null == outgoings) {
-            return null;
-        }
+    /**
+     * 不用缓存
+     * @return if this state is valid or no outgoings then return empty set
+     */
+    public Set<Trigger> getTriggers() {
         Set<Trigger> ts = new HashSet<>();
-        for(Transition t : outgoings) {
-            ts.add(t.getTrigger());
+        if(isStateValid()) {
+            for(Transition t : outgoings) {
+                ts.add(t.getTrigger());
+            }
         }
         return ts;
+    }
+    
+    public boolean isStateValid() {
+        return StringUtils.isNotBlank(id)
+                && StringUtils.isNotBlank(name)
+                && null != incomings
+                && null != outgoings;
     }
     
     /*****************getter, setter**/
