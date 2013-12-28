@@ -20,22 +20,22 @@ public class CTLFactoryTest {
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        System.out.println("BeforeClass");
+       //System.out.println("BeforeClass");
     }
 
     @AfterClass
     public static void tearDownAfterClass() throws Exception {
-        System.out.println("AfterClass");
+        //System.out.println("AfterClass");
     }
 
     @Before
     public void setUp() throws Exception {
-        System.out.println("Before test method");
+        //System.out.println("Before test method");
     }
 
     @After
     public void tearDown() throws Exception {
-        System.out.println("After test method");
+        //System.out.println("After test method");
     }
 
     @Test
@@ -57,7 +57,6 @@ public class CTLFactoryTest {
     @Test
     public final void testCreateTranPairCoverageCTL() {
         System.out.println("testCreateTranPairCoverageCTL");
-        System.out.println("testCreateTranCoverageCTL");
         CTLFactory factory = new CTLFactory(StateChartParser.parser());
         String ctl = factory.createTranPairCoverageCTL();
         System.out.println(ctl);

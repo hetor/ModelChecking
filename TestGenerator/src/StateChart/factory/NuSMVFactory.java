@@ -100,11 +100,11 @@ public class NuSMVFactory {
         sb.append("ASSIGN\n");
         
         //init
-        sb.append("init(state):=s0;\n");
-        sb.append("init(").append(initState.getName()).append("):=TRUE\n");
+        sb.append("init(state):=").append(statesNuSMV.get(initState.getName())).append(";\n");
+        sb.append("init(").append(initState.getName()).append("):=TRUE;\n");
         for(State s : states) {
             if(initState.equals(s)) continue;
-            sb.append("init(").append(s.getName()).append("):=FALSE\n");
+            sb.append("init(").append(s.getName()).append("):=FALSE;\n");
         }
         for(Trigger trigger : triggers) {
             sb.append("init(").append(trigger.getName()).append("):=");

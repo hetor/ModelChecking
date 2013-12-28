@@ -26,7 +26,7 @@ public class StateChartParser {
     static {
         SAXReader reader = new SAXReader();  
         InputStream in = StateChartParser.class.getClassLoader().
-                getResourceAsStream("statechart2.xmi");
+                getResourceAsStream("mc.xmi");
         //FIXME
         try {  
             doc = reader.read(in);
@@ -47,7 +47,6 @@ public class StateChartParser {
         usc.setStates(parseStates());
         usc.setTransitions(parseTransitions(usc));
         usc.setInitState(usc.getStateById(parseInitState(usm)));
-        
         return usc;
     }
     
