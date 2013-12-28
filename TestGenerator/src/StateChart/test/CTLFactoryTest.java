@@ -41,16 +41,16 @@ public class CTLFactoryTest {
     @Test
     public final void testCreateStateCoverageCTL() {
         System.out.println("testCreateStateCoverageCTL");
-        CTLFactory factory = new CTLFactory();
-        String ctl = factory.createStateCoverageCTL(StateChartParser.parser());
+        CTLFactory factory = new CTLFactory(StateChartParser.parser());
+        String ctl = factory.createStateCoverageCTL();
         System.out.println(ctl);
     }
 
     @Test
     public final void testCreateTranCoverageCTL() {
         System.out.println("testCreateTranCoverageCTL");
-        CTLFactory factory = new CTLFactory();
-        String ctl = factory.createTranCoverageCTL(StateChartParser.parser());
+        CTLFactory factory = new CTLFactory(StateChartParser.parser());
+        String ctl = factory.createTranCoverageCTL();
         System.out.println(ctl);
     }
 
@@ -58,8 +58,8 @@ public class CTLFactoryTest {
     public final void testCreateTranPairCoverageCTL() {
         System.out.println("testCreateTranPairCoverageCTL");
         System.out.println("testCreateTranCoverageCTL");
-        CTLFactory factory = new CTLFactory();
-        String ctl = factory.createTranPairCoverageCTL(StateChartParser.parser());
+        CTLFactory factory = new CTLFactory(StateChartParser.parser());
+        String ctl = factory.createTranPairCoverageCTL();
         System.out.println(ctl);
     }
 

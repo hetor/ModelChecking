@@ -28,28 +28,41 @@ public class Trigger {
     
     
     /********added method**/
+    /**
+     * add t to trans
+     */
     public void addTransition(Transition t) {
+        if(null == t) return;
+        if(null == trans) {
+            trans = new HashSet<>();
+        }
         trans.add(t);
     }
     
-    public Set<State> getSources() { //不用缓存
-        if(null == trans) {
-            return null;
-        }
+    /**
+     * 不用缓存
+     * @return if no return empty set
+     */
+    public Set<State> getSources() {
         Set<State> states = new HashSet<>();
-        for (Transition t : trans) {
-            states.add(t.getSource());
+        if(null != trans) {
+            for (Transition t : trans) {
+                states.add(t.getSource());
+            }
         }
         return states;
     }
     
-    public Set<State> getTargets() { //不用缓存
-        if(null == trans) {
-            return null;
-        }
+    /**
+     * 不用缓存
+     * @return if no return empty set
+     */
+    public Set<State> getTargets() {
         Set<State> states = new HashSet<>();
-        for (Transition t : trans) {
-            states.add(t.getTarget());
+        if(null != trans) {
+            for (Transition t : trans) {
+                states.add(t.getTarget());
+            }
         }
         return states;
     }

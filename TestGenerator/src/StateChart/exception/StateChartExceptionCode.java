@@ -14,6 +14,7 @@ public enum StateChartExceptionCode {
 	//umlstatechart
 	UMLSTATECHART_INVALID("状态图对象不可用（缺少数据）"),
 	STATE_INVALID("状态对象不可用（缺少数据）"),
+	TRANSITION_INVALID("迁移不可用（缺少数据）"),
 	
 	//xmi parse error
 	XMI_PARSE_ERROR(""),

@@ -36,7 +36,7 @@ public class State {
     
     /***************added method**/
     /**
-     * add t no matter state is or not valid
+     * add t to incommings
      */
     public void addIncomings(Transition t) {
         if(null == t) return;
@@ -47,7 +47,7 @@ public class State {
     }
     
     /**
-     * add t no matter state is or not valid
+     * add t to outgoings
      */
     public void addOutgoing(Transition t) {
         if(null == t) return;
@@ -59,11 +59,11 @@ public class State {
     
     /**
      * 不用缓存
-     * @return if this state is valid or no outgoings then return empty set
+     * @return if no return empty set
      */
     public Set<State> getPrevStates() {
         Set<State> states = new HashSet<>();
-        if(isStateValid()) {
+        if(null != incomings) {
             for (Transition t : incomings) {
                 states.add(t.getSource());
             }
@@ -73,11 +73,11 @@ public class State {
     
     /**
      * 不用缓存
-     * @return if this state is valid or no outgoings then return empty set
+     * @return if no return empty set
      */
     public Set<State> getNextStates() {
         Set<State> states = new HashSet<>();
-        if(isStateValid()) {
+        if(null != outgoings) {
             for (Transition t : outgoings) {
                 states.add(t.getTarget());
             }
@@ -87,11 +87,11 @@ public class State {
     
     /**
      * 不用缓存
-     * @return if this state is valid or no outgoings then return empty set
+     * @return if no return empty set
      */
     public Set<Trigger> getTriggers() {
         Set<Trigger> ts = new HashSet<>();
-        if(isStateValid()) {
+        if(null != outgoings) {
             for(Transition t : outgoings) {
                 ts.add(t.getTrigger());
             }
@@ -172,47 +172,47 @@ public class State {
     @Override
     public String toString() {
         
-        StringBuilder state = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         
-        state.append("(name:").append(name).append(", ").append("incomings:{");
+        sb.append("(name:").append(name).append(", ").append("incomings:{");
         
         if(null != incomings) {
             for(Transition t : incomings) {
-                state.append(t).append(",");
+                sb.append(t).append(",");
             }
         }
         
-        state.append("}, outgoings:{");
+        sb.append("}, outgoings:{");
         if(null != outgoings) {
             for(Transition t : outgoings) {
-                state.append(t).append(",");
+                sb.append(t).append(",");
             }
         }
         
-        state.append("}, prevStates:{");
+        sb.append("}, prevStates:{");
         Set<State> prevStates = getPrevStates();
         if(null != prevStates) {
             for (State s : prevStates) {
-                state.append(s.getName()).append(",");
+                sb.append(s.getName()).append(",");
             }
         }
         
-        state.append("}, nextStates:{");
+        sb.append("}, nextStates:{");
         Set<State> nextStates = getNextStates();
         if(null != nextStates) {
             for(State s : nextStates) {
-                state.append(s.getName()).append(",");
+                sb.append(s.getName()).append(",");
             }
         }
         
-        state.append("}, triggers:{");
+        sb.append("}, triggers:{");
         Set<Trigger> triggers = getTriggers();
         if(null != triggers) {
             for (Trigger trigger : triggers) {
-                state.append(trigger.getName()).append(",");
+                sb.append(trigger.getName()).append(",");
             }    
         }
-        state.append("})");
-        return state.toString();
+        sb.append("})");
+        return sb.toString();
     }
 }

@@ -1,69 +1,63 @@
 package StateChart.factory;
 
-import java.util.Collection;
 import java.util.Set;
 
 import StateChart.entity.State;
 import StateChart.entity.Transition;
 import StateChart.entity.UMLStateChart;
+import StateChart.exception.StateChartException;
+import StateChart.exception.StateChartExceptionCode;
 import StateChart.utils.StringBuilderUtil;
 
 public class CTLFactory {
-
-    public String createStateCoverageCTL(UMLStateChart usc) {
+    
+    private UMLStateChart usc;
+    
+    public CTLFactory(UMLStateChart usc) {
         if(null == usc) {
-            return "";
+            throw new StateChartException(StateChartExceptionCode.NULL_POINTER, "状态图对象不能为空");
         }
-        
-        Collection<State> states = usc.getStates().values();
-        if(null == states || states.size() <= 0) {
-            return "";
+        if(!usc.isUMLStateChartValid()) {
+            throw new StateChartException(StateChartExceptionCode.UMLSTATECHART_INVALID);
         }
-        
+        this.usc = usc;
+    }
+
+    public String createStateCoverageCTL() {
         StringBuilder sb = new StringBuilder();
         sb.append("--可达性验证\n");
-        for (State s : states) {
+        for (State s : usc.getStates().values()) {
+            if(!s.isStateValid()) {
+                throw new StateChartException(StateChartExceptionCode.STATE_INVALID);
+            }
             sb.append("SPEC AG !").append(s.getName()).append(";\n");
         }
-        
         return sb.toString();
     }
     
-    public String createTranCoverageCTL(UMLStateChart usc) {
-        if(null == usc) {
-            return "";
-        }
-        
-        Collection<Transition> trans = usc.getTransitions().values();
-        if(null == trans || trans.size() <= 0) {
-            return "";
-        }
-        
+    public String createTranCoverageCTL() {
         StringBuilder sb = new StringBuilder();
         sb.append("--活性验证\n");
-        for(Transition t : trans) {
+        for(Transition t : usc.getTransitions().values()) {
+            if(!t.isTransitionValid()) {
+                throw new StateChartException(StateChartExceptionCode.TRANSITION_INVALID);
+            }
             sb.append("SPEC AG(").append(t.getSource().getName()).append(" -> !(")
             .append(t.getTrigger().getName()).append(" & EX ").append(t.getTarget().getName())
             .append("));\n");
         }
-        
         return sb.toString();
     }
     
-    public String createTranPairCoverageCTL(UMLStateChart usc) {
-        if(null == usc) {
-            return "";
-        }
-        
-        Collection<State> states = usc.getStates().values();
-        if(null == states || states.size() <= 0) {
-            return "";
-        }
+    public String createTranPairCoverageCTL() {
         StringBuilder sb = new StringBuilder();
         sb.append("--安全性验证\n");
-        for (State s : states) {
+        for (State s : usc.getStates().values()) {
+            if(!s.isStateValid()) {
+                throw new StateChartException(StateChartExceptionCode.STATE_INVALID);
+            }
             Set<Transition> outgoings = s.getOutgoings();
-            if(null != outgoings && outgoings.size() > 0) {
+            if(!outgoings.isEmpty()) {
                 sb.append("SPEC AG(").append(s.getName()).append(" -> !EX!(");
                 for(Transition t : outgoings) {
                     sb.append(t.getTarget().getName()).append("|");
@@ -72,7 +66,6 @@ public class CTLFactory {
                 sb.append("));\n");
             }
         }
-        
         return sb.toString();
     }
 }

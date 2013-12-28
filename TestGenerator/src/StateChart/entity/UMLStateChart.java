@@ -27,6 +27,9 @@ public class UMLStateChart {
     
     
     /**added method**/
+    /**
+     * @return if no have then return null
+     */
     public State getStateById(String id) {
         if(null==states || states.size()==0) {
             return null;
@@ -34,6 +37,9 @@ public class UMLStateChart {
         return states.get(id);
     } 
     
+    /**
+     * @return if no have then return null
+     */
     public Transition getTransitionById(String id) {
         if(null==transitions || transitions.size()==0) {
             return null;
@@ -41,6 +47,9 @@ public class UMLStateChart {
         return transitions.get(id);
     }
     
+    /**
+     * @return if no have then return null
+     */
     public Trigger getTrigerById(String id) {
         if(null==triggers || triggers.size()==0) {
             return null;
