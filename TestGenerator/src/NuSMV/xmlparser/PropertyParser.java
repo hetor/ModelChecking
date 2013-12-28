@@ -23,7 +23,7 @@ public class PropertyParser {
     static {
         SAXReader reader = new SAXReader();  
         InputStream in = PropertyParser.class.getClassLoader().
-                getResourceAsStream("property.xml");
+                getResourceAsStream("mc-property.xml");
         //FIXME
         try {  
             doc = reader.read(in);

@@ -25,7 +25,7 @@ public class TracesParser {
     static {
         SAXReader reader = new SAXReader();  
         InputStream in = TracesParser.class.getClassLoader().
-                getResourceAsStream("traces.xml");
+                getResourceAsStream("mc-trace.xml");
         //FIXME
         try {  
             doc = reader.read(in);
