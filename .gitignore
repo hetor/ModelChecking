@@ -1,6 +1,7 @@
 *.class
 bin/
 .classpath
+.settings/
 #Package Files#
 *.jar
 *.war
