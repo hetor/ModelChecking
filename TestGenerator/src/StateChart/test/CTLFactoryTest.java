@@ -3,6 +3,9 @@
  */
 package StateChart.test;
 
+
+import java.util.List;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -10,7 +13,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import StateChart.factory.CTLFactory;
-import StateChart.xmlparser.StateChartParser;
+import StateChart.xmlparser.UMLStateChartParser;
 
 /**
  * 
@@ -41,25 +44,31 @@ public class CTLFactoryTest {
     @Test
     public final void testCreateStateCoverageCTL() {
 //        System.out.println("testCreateStateCoverageCTL");
-        CTLFactory factory = new CTLFactory(StateChartParser.parser());
-        String ctl = factory.createStateCoverageCTL();
-        System.out.println(ctl);
+        List<String> ctls = CTLFactory.createStateCoverageCTL(UMLStateChartParser.parser("mc-statechart.xmi"));
+        for (String ctl : ctls) {
+            System.out.println(ctl);
+        }
+        System.out.println();
     }
 
     @Test
     public final void testCreateTranCoverageCTL() {
 //        System.out.println("testCreateTranCoverageCTL");
-        CTLFactory factory = new CTLFactory(StateChartParser.parser());
-        String ctl = factory.createTranCoverageCTL();
-        System.out.println(ctl);
+        List<String> ctls = CTLFactory.createTranCoverageCTL(UMLStateChartParser.parser("mc-statechart.xmi"));
+        for (String ctl : ctls) {
+            System.out.println(ctl);
+        }
+        System.out.println();
     }
 
     @Test
     public final void testCreateTranPairCoverageCTL() {
 //        System.out.println("testCreateTranPairCoverageCTL");
-        CTLFactory factory = new CTLFactory(StateChartParser.parser());
-        String ctl = factory.createTranPairCoverageCTL();
-        System.out.println(ctl);
+        List<String> ctls = CTLFactory.createTranPairCoverageCTL(UMLStateChartParser.parser("mc-statechart.xmi"));
+        for (String ctl : ctls) {
+            System.out.println(ctl);
+        }
+        System.out.println();
     }
 
 }

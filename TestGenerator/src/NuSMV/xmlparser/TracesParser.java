@@ -22,24 +22,11 @@ public class TracesParser {
     
     private static Document doc = null;
     
-    static {
-        SAXReader reader = new SAXReader();  
-        InputStream in = TracesParser.class.getClassLoader().
-                getResourceAsStream("mc-trace.xml");
-        //FIXME
-        try {  
-            doc = reader.read(in);
-        } catch (DocumentException e) {  
-            e.printStackTrace();
-        } 
-    }
-
     @SuppressWarnings("unchecked")
-    public static List<Trace> parser() {
-        
-        List<Trace> traces = new ArrayList<>();
-        
+    public static List<Trace> parser(String tPath) {
+        init(tPath);
         Element root = doc.getRootElement(); 
+        List<Trace> traces = new ArrayList<>();
         List<Element> counterEls = root.elements("counter-example");
         
         for (Element counterEl : counterEls) {
@@ -66,5 +53,16 @@ public class TracesParser {
         }
         
         return traces;
+    }
+    
+    private static void init(String tPath) {
+        SAXReader reader = new SAXReader();  
+        InputStream in = TracesParser.class.getClassLoader().
+                getResourceAsStream(tPath);
+        try {  
+            doc = reader.read(in);
+        } catch (DocumentException e) {  
+            e.printStackTrace();
+        } 
     }
 }

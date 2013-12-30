@@ -3,9 +3,12 @@ package StateChart.xmlparser;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
+import org.apache.commons.lang3.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -19,23 +22,12 @@ import StateChart.entity.UMLStateChart;
 import StateChart.exception.StateChartException;
 import StateChart.exception.StateChartExceptionCode;
 
-public class StateChartParser {
+public class UMLStateChartParser {
     
     private static Document doc = null;
     
-    static {
-        SAXReader reader = new SAXReader();  
-        InputStream in = StateChartParser.class.getClassLoader().
-                getResourceAsStream("mc.xmi");
-        //FIXME
-        try {  
-            doc = reader.read(in);
-        } catch (DocumentException e) {  
-            e.printStackTrace();  
-        } 
-    }
-
-    public static UMLStateChart parser(){
+    public static UMLStateChart parser(String uscPath){
+        init(uscPath);
         Element usm = (Element) doc.selectSingleNode("//UML:StateMachine");
         if(null == usm) {
             return null;
@@ -47,7 +39,34 @@ public class StateChartParser {
         usc.setStates(parseStates());
         usc.setTransitions(parseTransitions(usc));
         usc.setInitState(usc.getStateById(parseInitState(usm)));
+        generateAliasForState(usc.getInitState());
         return usc;
+    }
+    
+    private static void init(String uscPath) {
+        SAXReader reader = new SAXReader();  
+        InputStream in = UMLStateChartParser.class.getClassLoader().
+                getResourceAsStream(uscPath);
+        try {  
+            doc = reader.read(in);
+        } catch (DocumentException e) {  
+            e.printStackTrace();  
+        } 
+    }
+    
+    private static void generateAliasForState(State initState) {
+        int i=0;
+        Queue<State> q = new LinkedList<>(); 
+        q.add(initState);
+        while(!q.isEmpty()) {
+            State state = q.poll();
+            if(StringUtils.isBlank(state.getAlias())) {
+                state.setAlias("s"+i++);
+                for(State s : state.getNextStates()) {
+                    q.offer(s);
+                }
+            }
+        }
     }
     
     @SuppressWarnings("unchecked")
@@ -175,7 +194,7 @@ public class StateChartParser {
         }else {
             throw  new StateChartException(StateChartExceptionCode.METHOD_PARAM_ERROR, "参数node不是SimpleState或者CompositeState");
         }
-    } 
+    }
     
     /**
      * 判断迁移是否是有效的迁移

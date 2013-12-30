@@ -3,13 +3,13 @@ package StateChart.test;
 import org.junit.Test;
 
 import StateChart.factory.NuSMVFactory;
-import StateChart.xmlparser.StateChartParser;
+import StateChart.xmlparser.UMLStateChartParser;
 
-public class NuSMVFactoryTester {
+public class NuSMVFactoryTest {
 
     @Test
     public void testCreateNuSMV() {
-        NuSMVFactory factory = new NuSMVFactory(StateChartParser.parser());
+        NuSMVFactory factory = new NuSMVFactory(UMLStateChartParser.parser("mc-statechart.xmi"));
         System.out.println(factory.createNuSMV());
     }
 

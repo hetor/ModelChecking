@@ -31,7 +31,7 @@ public class UMLStateChart {
      * @return if no have then return null
      */
     public State getStateById(String id) {
-        if(null==states || states.size()==0) {
+        if(null==states || states.isEmpty()) {
             return null;
         }
         return states.get(id);
@@ -40,8 +40,36 @@ public class UMLStateChart {
     /**
      * @return if no have then return null
      */
+    public State getStateByName(String name) {
+        if(null != name && null != states && !states.isEmpty()) {
+            for (State s : states.values()) {
+                if(name.equals(s.getName())) {
+                    return s;
+                }
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * @return if no have then return null
+     */
+    public State getStateByAlias(String alias) {
+        if(null != alias && null != states && !states.isEmpty()) {
+            for (State s : states.values()) {
+                if(alias.equals(s.getAlias())) {
+                    return s;
+                }
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * @return if no have then return null
+     */
     public Transition getTransitionById(String id) {
-        if(null==transitions || transitions.size()==0) {
+        if(null==transitions || transitions.isEmpty()) {
             return null;
         }
         return transitions.get(id);
@@ -50,8 +78,22 @@ public class UMLStateChart {
     /**
      * @return if no have then return null
      */
+    public Transition getTransitionBySourceAndTarget(State source, State target) {
+        if(null != source && null != target) {
+            for (Transition t : transitions.values()) {
+                if(source.equals(t.getSource()) && target.equals(t.getTarget())) {
+                    return t;
+                }
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * @return if no have then return null
+     */
     public Trigger getTrigerById(String id) {
-        if(null==triggers || triggers.size()==0) {
+        if(null==triggers || triggers.isEmpty()) {
             return null;
         }
         return triggers.get(id);

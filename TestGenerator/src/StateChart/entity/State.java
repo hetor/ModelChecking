@@ -17,6 +17,9 @@ public class State {
     /**状态名称**/
     private String name;
     
+    /**别名**/
+    private String alias;
+    
     /**incoming迁移集**/
     private Set<Transition> incomings;
     
@@ -126,6 +129,14 @@ public class State {
         this.name = name;
     }
     
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
     public Set<Transition> getIncomings() {
         return incomings;
     }

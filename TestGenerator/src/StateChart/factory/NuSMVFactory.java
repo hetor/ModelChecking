@@ -1,10 +1,6 @@
 package StateChart.factory;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
 import java.util.Set;
 
 import StateChart.entity.State;
@@ -17,53 +13,22 @@ import StateChart.utils.StringBuilderUtil;
 public class NuSMVFactory {
     
     private UMLStateChart usc;
-    private Map<String, String> statesNuSMV; //<key,value> - <name, si>
     
     public NuSMVFactory(UMLStateChart usc) {
         if(null == usc) {
             throw new StateChartException(StateChartExceptionCode.NULL_POINTER, "状态图对象不能为空");
         }
-        if(!usc.isUMLStateChartValid()) {
-            throw new StateChartException(StateChartExceptionCode.UMLSTATECHART_INVALID);
-        }
-        convertStateNameUMLtoNuSMV(usc.getInitState());
         this.usc = usc;
     }
     
     public String createNuSMV() {
-        
         Collection<State> states = usc.getStates().values();
         Collection<Trigger> triggers = usc.getTriggers().values();
-        State initState = usc.getInitState();
-        
-        if(!initState.isStateValid()) {
-            throw new StateChartException(StateChartExceptionCode.STATE_INVALID);
-        }
-        
-        return constructHEAD() + constructVAR(states, triggers) + constructASSIGN(states, triggers, initState);
+        return constructHEAD() + constructVAR(states, triggers) + constructASSIGN(states, triggers, usc.getInitState());
     }
     
     public void toFile(String path) {
         //TODO
-    }
-    
-    private void convertStateNameUMLtoNuSMV(State initState) {
-        statesNuSMV = new HashMap<>();
-        Queue<State> q = new LinkedList<>(); 
-        int i=1;
-        statesNuSMV.put(initState.getName(), "s0");
-        for(State s : initState.getNextStates()) {
-            q.offer(s);
-        }
-        while(!q.isEmpty()) {
-            State state = q.poll();
-            if(!statesNuSMV.containsKey(state.getName())) {
-                statesNuSMV.put(state.getName(), "s"+i++);
-                for(State s : state.getNextStates()) {
-                    q.offer(s);
-                }
-            }
-        }
     }
     
     private String constructHEAD() {
@@ -76,11 +41,10 @@ public class NuSMVFactory {
         
         //state
         sb.append("state: {");
-        for (String sNuSMV : statesNuSMV.values()) {
-            sb.append(sNuSMV).append(",");
+        for (State s : states) {
+            sb.append(s.getAlias()).append(",");
         }
-        StringBuilderUtil.deleteLastChar(sb);
-        sb.append("};\n");
+        sb.deleteCharAt(sb.length()-1).append("};\n");
         
         //other vars(triggers)
         for(State s : states) {
@@ -100,7 +64,7 @@ public class NuSMVFactory {
         sb.append("ASSIGN\n");
         
         //init
-        sb.append("init(state):=").append(statesNuSMV.get(initState.getName())).append(";\n");
+        sb.append("init(state):=").append(initState.getAlias()).append(";\n");
         sb.append("init(").append(initState.getName()).append("):=TRUE;\n");
         for(State s : states) {
             if(initState.equals(s)) continue;
@@ -121,9 +85,9 @@ public class NuSMVFactory {
         for (State state : states) {
             Set<State> nextStates = state.getNextStates();
             if(!nextStates.isEmpty()) {
-                sb.append("    state=").append(statesNuSMV.get(state.getName())).append(": {");
+                sb.append("    state=").append(state.getAlias()).append(": {");
                 for (State s : nextStates) {
-                    sb.append(statesNuSMV.get(s.getName())).append(",");
+                    sb.append(s.getAlias()).append(",");
                 }
                 StringBuilderUtil.deleteLastChar(sb);
                 sb.append("};\n");
@@ -133,7 +97,7 @@ public class NuSMVFactory {
         
         for(State state : states) {
             sb.append("next(").append(state.getName()).append("):=case\n    ");
-            sb.append("next(state)=").append(statesNuSMV.get(state.getName())).append(": TRUE;\n    TRUE: FALSE;\nesac;\n\n");
+            sb.append("next(state)=").append(state.getAlias()).append(": TRUE;\n    TRUE: FALSE;\nesac;\n\n");
         }
         
         for (Trigger trigger : triggers) {
@@ -141,7 +105,7 @@ public class NuSMVFactory {
             if(sources.size() > 0) {
                 sb.append("next(").append(trigger.getName()).append("):=case\n    ");
                 for (State s : sources) {
-                    sb.append("next(state)=").append(statesNuSMV.get(s.getName())).append("|");
+                    sb.append("next(state)=").append(s.getAlias()).append("|");
                 }
                 StringBuilderUtil.deleteLastChar(sb);
                 sb.append(": TRUE;\n    TRUE: FALSE;\nesac;\n\n");

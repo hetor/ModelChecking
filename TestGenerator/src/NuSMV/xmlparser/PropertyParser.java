@@ -20,24 +20,11 @@ public class PropertyParser {
     
     private static Document doc = null;
     
-    static {
-        SAXReader reader = new SAXReader();  
-        InputStream in = PropertyParser.class.getClassLoader().
-                getResourceAsStream("mc-property.xml");
-        //FIXME
-        try {  
-            doc = reader.read(in);
-        } catch (DocumentException e) {  
-            e.printStackTrace();  
-        } 
-    }
-
     @SuppressWarnings("unchecked")
-    public static List<Property> parser() {
-        
-        List<Property> properties = new ArrayList<>();
-        
+    public static List<Property> parser(String pPath) {
+        init(pPath);
         Element root = doc.getRootElement(); 
+        List<Property> properties = new ArrayList<>();
         List<Element> propertyEles = root.elements("property");
         
         for (Element propertyEle : propertyEles) {
@@ -48,10 +35,21 @@ public class PropertyParser {
             property.setType(PropertyType.valueOf(propertyEle.elementTextTrim("type")));
             property.setStatus(Boolean.valueOf(propertyEle.elementTextTrim("status")));
             property.setBound(Integer.valueOf(propertyEle.elementTextTrim("bound")));
-            property.setTrace(Integer.valueOf(propertyEle.elementTextTrim("trace")));
+            property.setTraceId(Integer.valueOf(propertyEle.elementTextTrim("trace")));
             properties.add(property);
         }
         
         return properties; 
+    }
+    
+    private static void init(String pPath) {
+        SAXReader reader = new SAXReader();  
+        InputStream in = PropertyParser.class.getClassLoader().
+                getResourceAsStream(pPath);
+        try {  
+            doc = reader.read(in);
+        } catch (DocumentException e) {  
+            e.printStackTrace();  
+        } 
     }
 }
